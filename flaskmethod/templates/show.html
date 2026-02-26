@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration successful</h1>
+    <h2>Your details are as follows:</h2>
+    {{result}} <br>
+    <h1>The username is:{{result.username}} <br></h1>
+    <h1>Email is: {{result.email}} <br></h1>
+   <h1>Contact is: {{result.contact}} <br></h1>
+
+{% for key, value in result.items() %}
+    <b>{{key}}: {{value}}</b> <br>
+{% endfor %}
+
+
+</body>
+</html>
