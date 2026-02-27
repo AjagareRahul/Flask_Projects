@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f8;
+        }
+        .profile-box{
+            width: 350px;
+            margin: 80px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2{
+            color: #333;
+        }
+        p{
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        a{
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        a:hover{
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-box">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> {{ fname }}</p>
+        <p><strong>Email:</strong> {{ femail }}</p>
+
+        <a href="/">Logout</a>
+    </div>
+
+</body>
+</html>
