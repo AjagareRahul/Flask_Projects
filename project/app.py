@@ -1,6 +1,9 @@
-from flask import Flask, redirect, request, render_template, make_response
+from flask import Flask, redirect, request, render_template, make_response, session
+from flask_session import Session
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 
 
@@ -11,29 +14,40 @@ def login():
         email = request.form['email']
         password = request.form['password']
         if username == 'Rahul' and email == 'ajagarerahul@gmail.com' and password == 'Rahul2004':
-            resp = make_response(redirect('/success'))
-            resp.set_cookie('username', username)
-            resp.set_cookie('email', email)
-            return resp
+            session['username'] = username
+            session['email'] = email
+            return redirect('/profile')
         else:
-            return redirect('/error')
+            return render_template('error.html', error_message="Invalid username, email, or password. Please try again.")
         
     return render_template('login.html')
 
 
 @app.route('/success')
 def success():
-    return render_template('success.html')
+    if 'username' not in session:
+        return redirect('/')
+    us = session.get('username')
+    em = session.get('email')
+    return render_template('success.html', fname=us, femail=em)
 
    
 
 
 @app.route('/profile')
 def profile():
-  
-    us = request.cookies.get('username')
-    em = request.cookies.get('email')
+    if 'username' not in session:
+        return redirect('/')
+    
+    us = session.get('username')
+    em = session.get('email')
     return render_template('profile.html', fname=us, femail=em) 
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 
 @app.route('/error')
